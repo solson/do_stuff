@@ -60,7 +60,7 @@ end
 [~]$ t That thing I need to do.
 Added #1: That thing I need to do.
 [~}$ t # list everything
-  1 That thing I need to do.
+1. That thing I need to do.
 [~]$ t -e # edit the todo.txt in $EDITOR
 ##### TODO: Should I do any checking and output here? #####
 [~}$ t Another thing.
