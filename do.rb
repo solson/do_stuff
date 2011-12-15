@@ -1,9 +1,15 @@
 #!/usr/bin/env ruby
-require 'optparse' # Standard, not a gem
+require 'fileutils'
+require 'optparse'
 require './todolist'
 
-# TODO: Get this from a config file.
-TODO_FILE = ENV['HOME'] + "/notes/todo.txt"
+DORC = ENV['HOME'] + '/.dorc'
+abort "Error: Couldn't find #{DORC}.\nPlease create it and put the " +
+  "path to your todo.txt file in it." unless File.exists?(DORC)
+
+TODO_FILE = File.expand_path(File.read(DORC).chomp)
+FileUtils.mkdir_p(File.dirname(TODO_FILE))
+FileUtils.touch(TODO_FILE)
 
 USAGE = <<EOS
 usage: #{$0}               list unfinished tasks
