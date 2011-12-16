@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 require 'optparse'
-require './todolist'
+require File.join(File.dirname(__FILE__), 'todolist')
 
 DORC = ENV['HOME'] + '/.dorc'
 abort "Error: Couldn't find #{DORC}.\nPlease create it and put the " +
