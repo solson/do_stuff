@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-require 'rubygems'
 require 'fileutils'
 require 'optparse'
 require 'do_stuff'
