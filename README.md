@@ -11,6 +11,7 @@ Install
 
 ``` bash
 gem install do_stuff
+echo /path/to/todo.txt > ~/.do_stuffrc
 ```
 
 I suggest setting up a shell alias or a symlink named `t` for `do_stuff`.
