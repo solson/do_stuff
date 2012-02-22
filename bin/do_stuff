@@ -12,12 +12,13 @@ TODO_FILE = File.expand_path(File.read(DO_STUFFRC).chomp)
 FileUtils.mkdir_p(File.dirname(TODO_FILE))
 FileUtils.touch(TODO_FILE)
 
+program = File.basename($0)
 USAGE = <<EOS
-usage: #{$0}               list unfinished tasks
-       #{$0} <task desc>   add a new task
-       #{$0} <task num>    erase task
-       #{$0} -e[task num]  edit task file and jump to given task
-       #{$0} -h            show this message
+usage: #{program}               list unfinished tasks
+       #{program} <task desc>   add a new task
+       #{program} <task num>    erase task
+       #{program} -e[task num]  edit task file and jump to given task
+       #{program} -h            show this message
 EOS
 
 OptionParser.new do |opts|
