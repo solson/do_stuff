@@ -14,7 +14,14 @@ gem install do_stuff
 echo /path/to/todo.txt > ~/.do_stuffrc
 ```
 
-I suggest setting up a shell alias or a symlink named `t` for `do_stuff`.
+It turns out using do\_stuff through RubyGems leads to noticably longer
+start-up times, so I recommend the following, assuming ~/bin is in your PATH:
+
+``` bash
+do_stuff --standalone ~/bin/t
+```
+
+Now you can use `t` just like you would `do_stuff`, and it's fast!
 
 Usage
 -----
