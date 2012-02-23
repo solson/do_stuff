@@ -15,7 +15,8 @@ echo /path/to/todo.txt > ~/.do_stuffrc
 ```
 
 It turns out using do\_stuff through RubyGems leads to noticably longer
-start-up times, so I recommend the following, assuming ~/bin is in your PATH:
+start-up times, so I recommend the following, assuming `~/bin` is in your
+`PATH`:
 
 ``` bash
 do_stuff --standalone ~/bin/t
