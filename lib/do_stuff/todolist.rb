@@ -17,11 +17,12 @@ module DoStuff
     end
 
     def erase(task_num)
-      raise "No such task ##{task_num}." unless @tasks[task_num - 1]
+      raise "No such task ##{task_num}." unless task_num >= 0 && @tasks[task_num - 1]
       @tasks[task_num - 1] = nil
     end
 
     def get(task_num)
+	  return nil if task_num <= 0
       @tasks[task_num - 1]
     end
 
