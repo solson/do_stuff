@@ -12,10 +12,9 @@ module DoStuff
       FileUtils.mkdir_p(File.dirname(todofile))
       FileUtils.touch(todofile)
 
-
       opts = OptionParser.new do |opts|
         opts.on('-e [TASK NUM]') do |task_num|
-          TodoList.edit(todofile)
+          Tasklist.edit(todofile)
           exit
         end
 
@@ -42,8 +41,8 @@ module DoStuff
       end
 
       begin
-        todolist = TodoList.new(todofile)
-      rescue TodoList::ParseError => e
+        todolist = Tasklist.new(todofile)
+      rescue Tasklist::ParseError => e
         abort "Error parsing #{e.file}: #{e.message}"
       end
 
@@ -53,9 +52,9 @@ module DoStuff
         end
       elsif argv.length == 1 && argv[0] =~ /^\d+$/
         task_num = argv[0].to_i
-        task = todolist.get(task_num)
-        abort "There is no task ##{task_num}." unless task
-        todolist.erase(task_num)
+        abort "There is no task ##{task_num}." unless todolist.tasks.key?(task_num)
+        task = todolist[task_num]
+        todolist.delete(task_num)
         todolist.write!
         puts "Erased ##{task_num}: #{task}"
       else
