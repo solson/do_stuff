@@ -14,7 +14,60 @@ module DoStuff
 
       opts = OptionParser.new do |opts|
         opts.on('-e [TASK NUM]') do |task_num|
-          Tasklist.edit(todofile)
+          begin
+            pre_todolist = Tasklist.new(todofile)
+          rescue Tasklist::ParseError => e
+            pre_error = e
+          end
+
+          run_editor(todofile, task_num)
+
+          begin
+            post_todolist = Tasklist.new(todofile)
+          rescue Tasklist::ParseError => e
+            post_error = e
+          end
+
+          if post_error
+            if pre_error
+              if pre_error.message == post_error.message
+                puts "Syntax error unchanged by edit.\n#{pre_error.message}"
+              else
+                puts "Pre-edit syntax error: #{pre_error.message}"
+                puts "Post-edit syntax error: #{post_error.message}"
+              end
+            else
+              puts "New syntax error introduced.\n#{post_error.message}"
+            end
+            abort
+          end
+
+          if pre_error && !post_error
+            puts "Syntax error fixed by edit."
+            exit
+          end
+
+          # If there were no errors, compare the old todolist with the new
+          # one, finding what was added, removed, and changed.
+          added_keys = post_todolist.tasks.keys - pre_todolist.tasks.keys
+          added_keys.each do |task_num|
+            puts "Added ##{task_num}: #{post_todolist[task_num]}"
+          end
+
+          removed_keys = pre_todolist.tasks.keys - post_todolist.tasks.keys
+          removed_keys.each do |task_num|
+            puts "Erased ##{task_num}: #{pre_todolist[task_num]}"
+          end
+
+          old_keys = pre_todolist.tasks.keys & post_todolist.tasks.keys
+          old_keys.each do |task_num|
+            if pre_todolist[task_num] != post_todolist[task_num]
+              puts "Changed ##{task_num}:"
+              puts "\033[31;1m-#{pre_todolist[task_num]}" # red
+              puts "\033[32;1m+#{post_todolist[task_num]}" # green
+            end
+          end
+
           exit
         end
 
@@ -43,7 +96,7 @@ module DoStuff
       begin
         todolist = Tasklist.new(todofile)
       rescue Tasklist::ParseError => e
-        abort "Error parsing #{e.file}: #{e.message}"
+        abort e.message
       end
 
       if argv.length == 0
@@ -66,6 +119,11 @@ module DoStuff
       end
     end
 
+    def self.run_editor(file, task_num)
+      # TODO: Use task_num to jump to a line
+      system(ENV['EDITOR'], file)
+    end
+
     def self.usage
       program = File.basename($0)
 
@@ -73,7 +131,7 @@ module DoStuff
 usage: #{program}                    list unfinished tasks
        #{program} <task desc>        add a new task
        #{program} <task num>         erase task
-       #{program} -e[task num]       edit task file and jump to given task
+       #{program} -e [task num       edit task file and jump to given task
        #{program} -h, --help         show this message
       EOS
 

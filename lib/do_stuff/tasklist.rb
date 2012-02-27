@@ -32,11 +32,6 @@ module DoStuff
       end
     end
 
-    def self.edit(file)
-      # TODO: Use task_num to jump to a line
-      system(ENV['EDITOR'], file)
-    end
-
     class ParseError < ::StandardError
       attr_accessor :file
       def initialize(file, msg)
