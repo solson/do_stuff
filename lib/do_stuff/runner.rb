@@ -120,8 +120,17 @@ module DoStuff
     end
 
     def self.run_editor(file, task_num)
-      # TODO: Use task_num to jump to a line
-      system(ENV['EDITOR'], file)
+      target_line = nil
+
+      File.readlines(file).each_with_index do |line, line_num|
+        target_line = line_num + 1 if line.start_with?("#{task_num}. ")
+      end
+
+      if target_line
+        system(ENV['EDITOR'], file, "+#{target_line}")
+      else
+        system(ENV['EDITOR'], file)
+      end
     end
 
     def self.usage
