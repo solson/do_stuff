@@ -28,7 +28,7 @@ module DoStuff
 
     def write!
       File.open(@file, 'w') do |f|
-        tasks.each{|num, task| f.puts("#{num}. #{task}") }
+        tasks.sort.each{|num, task| f.puts("#{num}. #{task}") }
       end
     end
 

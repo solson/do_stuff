@@ -100,7 +100,7 @@ module DoStuff
       end
 
       if argv.length == 0
-        todolist.tasks.each do |num, task|
+        todolist.tasks.sort.each do |num, task|
           puts "#{num}. #{task}"
         end
       elsif argv.length == 1 && argv[0] =~ /^\d+$/
