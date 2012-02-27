@@ -131,7 +131,7 @@ module DoStuff
 usage: #{program}                    list unfinished tasks
        #{program} <task desc>        add a new task
        #{program} <task num>         erase task
-       #{program} -e [task num       edit task file and jump to given task
+       #{program} -e [task num]      edit task file and jump to given task
        #{program} -h, --help         show this message
       EOS
 
