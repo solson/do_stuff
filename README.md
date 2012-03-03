@@ -30,38 +30,46 @@ Usage
 See `t -h`. Examples of use below.
 
 ```
+[~]$ t -h
+usage: t                    list unfinished tasks
+       t <task desc>        add a new task
+       t <task num>         erase task
+       t -e [task num]      edit task file and jump to given task
+       t -h, --help         show this message
 [~]$ t That thing I need to do.
 Added #1: That thing I need to do.
-[~]$ t
-1. That thing I need to do.
-[~]$ t -e # edit the todo.txt in $EDITOR
-[~]$ t Another thing.
-Added #3: Another thing.
-[~]$ t And another.
-Added #4: And another.
+[~]$ t -e # open the todo file with $EDITOR
+Added #2: That thing I added from -e.
+[~]$ t Walk the dog.
+Added #3: Walk the dog.
+[~]$ t Wash my clothes.
+Added #4: Wash my clothes.
 [~]$ t ALL the things.
 Added #5: ALL the things.
 [~]$ t
 1. That thing I need to do.
 2. That thing I added from -e.
-3. Another thing.
-4. And another.
+3. Walk the dog.
+4. Wash my clothes.
 5. ALL the things.
 [~]$ t 2
 Erased #2: That thing I added from -e.
 [~]$ t 4
-Erased #4: And another.
+Erased #4: Wash my clothes.
 [~]$ t
 1. That thing I need to do.
-3. Another thing.
+3. Walk the dog.
 5. ALL the things.
-[~]$ t Edit my todo list.
-Added #2: Edit my todo list.
+[~]$ t Edit my todo list in vim.
+Added #2: Edit my todo list in vim.
 [~]$ t
 1. That thing I need to do.
-2. Edit my todo list.
-3. Another thing.
+2. Edit my todo list in vim.
+3. Walk the dog.
 5. ALL the things.
-[~]$ t -e2 # start $EDITOR at task 2 in todo.txt (if possible)
+[~]$ t -e2 # edit with $EDITOR, jumping to line with task #2
+Changed #2:
+-Edit my todo list in vim.
++Finish the demonstration.
 ```
 
