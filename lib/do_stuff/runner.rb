@@ -3,6 +3,10 @@ require 'optparse'
 
 module DoStuff
   module Runner
+    RED   = "\033[31;1m"
+    GREEN = "\033[32;1m"
+    RESET = "\033[m"
+
     def self.execute(*argv)
       dostuffrc = ENV['HOME'] + '/.do_stuffrc'
       abort "Error: Couldn't find #{dostuffrc}.\nPlease create it and put " +
@@ -63,8 +67,8 @@ module DoStuff
           old_keys.each do |task_num|
             if pre_todolist[task_num] != post_todolist[task_num]
               puts "Changed ##{task_num}:"
-              puts "\033[31;1m-#{pre_todolist[task_num]}" # red
-              puts "\033[32;1m+#{post_todolist[task_num]}" # green
+              puts "#{RED}-#{pre_todolist[task_num]}#{RESET}"
+              puts "#{GREEN}+#{post_todolist[task_num]}#{RESET}"
             end
           end
 
