@@ -168,16 +168,17 @@ module DoStuff
       program = File.basename($0)
 
       print <<-EOS
-usage: #{program}                    list unfinished tasks
-       #{program} <task desc>        add a new task
-       #{program} <task num>         erase task
-       #{program} -e [task num]      edit task file and jump to given task
-       #{program} -h, --help         show this message
+usage: #{program}                      list unfinished tasks
+       #{program} <task desc>          add a new task
+       #{program} <task num>           erase task
+       #{program} -e [task num]        edit task file [and jump to given task]
+       #{program} -e<task num> <text>  replace task with given text
+       #{program} -h, --help           show this message
       EOS
 
       if defined?(::DoStuff::Standalone)
         print <<-EOS
-       #{program} --standalone FILE  generate a standalone version of do_stuff
+       #{program} --standalone FILE    generate a standalone version of do_stuff
         EOS
       end
     end
