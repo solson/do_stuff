@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "do_stuff"
-  s.version     = "0.2.4"
+  s.version     = "0.3.0"
   s.authors     = ["Scott Olson"]
   s.email       = "scott@scott-olson.org"
   s.homepage    = "https://github.com/tsion/do_stuff"

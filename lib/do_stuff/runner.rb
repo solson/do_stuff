@@ -12,6 +12,9 @@ module DoStuff
       abort "Error: Couldn't find #{dostuffrc}.\nPlease create it and put " +
         "the path to your todo.txt file in it." unless File.exists?(dostuffrc)
 
+      # This will be set by options if we are to change the text of a task.
+      edit_target = nil
+
       taskfile = File.expand_path(File.read(dostuffrc).chomp)
       unless File.exists?(taskfile)
         FileUtils.mkdir_p(File.dirname(taskfile))
@@ -20,8 +23,12 @@ module DoStuff
 
       opts = OptionParser.new do |opts|
         opts.on('-e [TASK NUM]') do |task_num|
-          edit(taskfile, task_num)
-          exit
+          if argv.empty?
+            edit(taskfile, task_num)
+            exit
+          else
+            edit_target = task_num
+          end
         end
 
         opts.on('--standalone FILE') do |file|
@@ -50,6 +57,22 @@ module DoStuff
         tasklist = Tasklist.new(taskfile)
       rescue Tasklist::ParseError => e
         abort e.message
+      end
+
+      if edit_target
+        before_text = tasklist[edit_target]
+        tasklist[edit_target] = argv.join(' ')
+        tasklist.write!
+
+        if !before_text
+          puts "Added ##{edit_target}: #{tasklist[edit_target]}"
+        else
+          puts "Changed ##{edit_target}:"
+          puts "#{RED}-#{before_text}#{RESET}"
+          puts "#{GREEN}+#{tasklist[edit_target]}#{RESET}"
+        end
+
+        exit
       end
 
       if argv.length == 0

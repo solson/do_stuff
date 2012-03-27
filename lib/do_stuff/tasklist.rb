@@ -19,11 +19,15 @@ module DoStuff
     end
 
     def [](task_num)
-      @tasks[task_num]
+      @tasks[task_num.to_i]
+    end
+
+    def []=(task_num, task)
+      @tasks[task_num.to_i] = task
     end
 
     def delete(task_num)
-      @tasks.delete(task_num)
+      @tasks.delete(task_num.to_i)
     end
 
     def write!
