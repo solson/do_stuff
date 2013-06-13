@@ -152,15 +152,22 @@ module DoStuff
     end
 
     def self.run_editor(file, task_num=nil)
+      editor = ENV['EDITOR']
+
+      unless editor
+        $stderr.puts "The EDITOR environment variable isn't set (defaulting to vim)."
+        editor = 'vim'
+      end
+
       if task_num
         target = File.readlines(file).find_index do |line|
           line.start_with?("#{task_num}. ")
         end
 
         abort "Could not find task ##{task_num}." unless target
-        system(ENV['EDITOR'], file, "+#{target + 1}")
+        system(editor, file, "+#{target + 1}")
       else
-        system(ENV['EDITOR'], file)
+        system(editor, file)
       end
     end
 
