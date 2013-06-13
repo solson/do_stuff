@@ -6,6 +6,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/tsion/do_stuff"
   s.summary     = %q{A minimalistic command-line todo list}
   s.description = s.summary
+  s.licenses    = ['ISC']
 
   s.files       = Dir["lib/**/*.rb", "bin/*", "[A-Z]*"]
   s.executables = Dir["bin/*"].map{|f| File.basename(f) }
