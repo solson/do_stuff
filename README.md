@@ -4,7 +4,7 @@ do\_stuff
 Do\_stuff is a minimalistic command line todo list manager that doesn't get in
 your way. I created it because I could not find a todo list manager that I
 didn't dislike for some reason or another. Do\_stuff is simple in features and
-simple in code (written in one night).
+simple in code (mostly written in one night).
 
 Install
 -------
