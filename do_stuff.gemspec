@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name        = "do_stuff"
   s.version     = "0.3.1"
   s.authors     = ["Scott Olson"]
-  s.email       = "scott@scott-olson.org"
+  s.email       = "scott@solson.me"
   s.homepage    = "https://github.com/tsion/do_stuff"
   s.summary     = %q{A minimalistic command-line todo list}
   s.description = s.summary
